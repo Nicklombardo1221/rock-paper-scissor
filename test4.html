@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping list example</title>
+    <style>
+      li {
+        margin-bottom: 10px;
+      }
+
+      li button {
+        font-size: 12px;
+        margin-left: 20px;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h1>My shopping list</h1>
+
+    <div>
+      <label for="item">Enter a new item:</label>
+      <input type="text" name="item" id="item">
+      <button>Add item</button>
+    </div>
+
+    <h1>TEXT TEST</h1>
+
+    <div id="textinput">
+      <label for="item">Enter a new item:</label>
+      <input type="text" name="item" id="textbox1">
+      <button>Submit</button>
+      <label for="item">Enter a new item:</label>
+      <input type="text" name="item" id="textbox2">
+      <button>Submit</button>
+      <label for="item">Enter a new item:</label>
+      <input type="text" name="item" id="textbox3">
+      <label for="item">Enter a new item:</label>
+      <input type="text" name="item" id="textbox4">
+      <button>Submit</button>
+      <button>Submit</button>
+    </div>
+
+    <ul>
+
+    </ul>
+
+    <script>
+        // Step 1: Create three variables
+        const input = document.querySelector("input");
+        const button = document.querySelector("button");
+        const list = document.querySelector("ul");
+        
+        // Step 2: Create function for button click
+        button.addEventListener("click", () => {
+            // Step 3: Store current input value
+            const itemText = input.value.trim();
+            if (itemText === "") {
+                alert("Please enter an item.");
+                return;
+            }
+
+            // Step 4: Empty the input element
+            input.value = "";
+
+            // Step 5: Create three new elements
+            const listItem = document.createElement("li");
+            const listItemText = document.createElement("span");
+            const removeButton = document.createElement("button");
+
+            // Step 7: Set text content
+            listItemText.textContent = itemText;
+            removeButton.textContent = "Delete";
+
+            // Step 6: Append span and button as children of list item
+            listItem.appendChild(listItemText);
+            listItem.appendChild(removeButton);
+
+            // Step 8: Append list item to the list
+            list.appendChild(listItem);
+
+            // Step 9: Attach event handler to delete button
+            removeButton.addEventListener("click", () => {
+                list.removeChild(listItem);
+            });
+
+            // Step 10: Focus the input element
+            input.focus();
+        });
+        
+        // Initial focus when page loads
+        input.focus();
+
+        // Additional functionality for the second input
+        
+        let textboxes = document.querySelector("#textinput");
+
+        textinput.addEventListener("keydown", (event) => {
+            let target = event.target;
+
+            switch (target.id) {
+                case "textbox1":
+                    console.log(`Textbox 1: ${event.key}`);
+                    break;
+                case "textbox2":
+                    console.log(`Textbox 2: ${event.key}`);
+                    break;
+                case "textbox3":
+                    console.log(`Textbox 3: ${event.key}`);
+                    break;
+                case "textbox4":
+                    console.log(`Textbox 4: ${event.key}`);
+                    break;
+                default:
+                    console.log("Unknown textbox");
+            }
+        })
+
+        function highlight(elem, callback) {
+    elem.style.backgroundColor = 'yellow';
+
+    if(callback && typeof callback === 'function') {
+        callback(elem);
+    }
+}
+
+    </script>
+  </body>
+</html>
+
